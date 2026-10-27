@@ -1,0 +1,87 @@
+{
+  "_comment": "SYNTHETIC SAMPLE CATALOG. Illustrates the structure and rule format only; it is not the original (proprietary) catalog. Prompts and rule text are in Bahasa Indonesia on purpose.",
+  "departments": [
+    {
+      "id": "dept_b",
+      "name": "Department B",
+      "mainCategories": [
+        {
+          "id": "closure-position",
+          "name": "Closure position",
+          "subCategories": [
+            {
+              "id": "fr-b-01",
+              "phase": 1,
+              "requirement": "Closure harus dipasang di pole (aerial) atau di dalam handhole (underground).",
+              "notes": "Closure aerial ditandai dengan penanda berwarna atau panah pada pole / kabel. Closure underground tidak memerlukan penanda.",
+              "rules": [
+                {
+                  "title": "Jenis closure",
+                  "description": "Closure terpasang di pole (aerial) atau di dalam handhole (underground)",
+                  "attributes": [
+                    {"name": "jenis_closure", "type": "text",
+                     "description": "jenis closure bisa dikenali; value = aerial atau underground"}
+                  ]
+                },
+                {
+                  "title": "Penanda posisi",
+                  "description": "Closure aerial ditandai dengan penanda berwarna atau panah pada pole / kabel; tidak berlaku untuk underground",
+                  "attributes": [
+                    {"name": "closure_underground", "type": "bool",
+                     "description": "closure terpasang underground (di dalam handhole), bukan menggantung pada pole / kabel"},
+                    {"name": "penanda_terlihat", "type": "bool",
+                     "description": "penanda berwarna atau panah terlihat pada pole / kabel yang membawa closure. Isi false jika closure underground"}
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "optical-measurement",
+          "name": "Optical measurement",
+          "subCategories": [
+            {
+              "id": "fr-b-02",
+              "phase": 1,
+              "requirement": "Hasil ukur optical power meter harus terlihat pada panjang gelombang 1490 nm dengan nilai minimal -24 dBm.",
+              "rules": [
+                {
+                  "title": "Hasil OPM",
+                  "description": "Hasil OPM terlihat, di panjang gelombang 1490 nm, dan nilainya -24 dBm atau lebih",
+                  "attributes": [
+                    {"name": "hasil_opm_terlihat", "type": "bool", "description": "hasil OPM terlihat"},
+                    {"name": "panjang_gelombang", "type": "number", "unit": "nm",
+                     "description": "panjang gelombang yang tertera di OPM", "threshold": {"=": 1490}},
+                    {"name": "nilai_rsl", "type": "number", "unit": "dBm",
+                     "description": "nilai hasil ukur OPM", "threshold": {">=": -24}}
+                  ]
+                }
+              ]
+            },
+            {
+              "id": "fr-b-03",
+              "phase": 1,
+              "requirement": "Setiap perangkat harus memiliki label dengan kode yang mengikuti standar penomoran.",
+              "rules": [
+                {
+                  "title": "Label perangkat",
+                  "description": "Label perangkat terlihat dan kodenya terbaca",
+                  "attributes": [
+                    {"name": "label_terlihat", "type": "bool", "description": "label perangkat terlihat"},
+                    {"name": "label_perangkat", "type": "json",
+                     "description": "ada label di foto, value = satu item per label",
+                     "fields": [
+                       {"name": "kode", "type": "text", "description": "kode label seperti yang tercetak"},
+                       {"name": "format_sesuai", "type": "bool", "description": "format kode sesuai standar penomoran"}
+                     ]}
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}
